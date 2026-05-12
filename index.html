@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Full Screen Background | b.png</title>
+  <style>
+    /* COMPLETE RESET - NO MARGINS, NO PADDING, NO SCROLLBARS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* FULL SCREEN HTML & BODY */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;     /* removes all scrollbars */
+    }
+
+    body {
+      /* pure black fallback - no text, no blur */
+      background-color: #000000;
+    }
+
+    /* DIRECT FULL SCREEN BACKGROUND IMAGE */
+    /* Using inline block on body or direct div - simplest & cleanest */
+    .full-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* IMAGE STYLES - CRISP, NO BLUR, FULL COVERAGE */
+    .full-bg img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;     /* ensures image covers entire screen without distortion */
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* NO BLUR - keep image sharp and clear */
+    }
+
+    /* NO TEXT, NO WATERMARK, NO OVERLAY - completely clean background */
+    /* Absolutely no extra elements visible */
+  </style>
+</head>
+<body>
+
+  <!-- DIRECT IMAGE FROM IMG FOLDER - b.png -->
+  <!-- No text, no watermark, no blur, no overlay - pure fullscreen background -->
+  <div class="full-bg">
+    <img src="IMG/b.png" alt="" aria-hidden="true">
+  </div>
+
+  <!-- SIMPLE ERROR HANDLER (optional, but shows nothing on screen if image missing - keeps background black) -->
+  <script>
+    (function() {
+      const bgImage = document.querySelector('.full-bg img');
+      
+      // If image fails to load, keep black background - no text/watermark appears
+      bgImage.onerror = function() {
+        // Completely silent: just log to console for debugging, no visible elements
+        console.log("IMG/b.png not found. Ensure 'b.png' is inside 'IMG' folder (same directory as HTML)");
+        // Keep background black - no user visible message
+        document.body.style.backgroundColor = '#000000';
+      };
+      
+      // On successful load, just log - no visible changes
+      bgImage.onload = function() {
+        console.log("✅ Full background loaded: IMG/b.png");
+      };
+    })();
+  </script>
+</body>
+</html>
