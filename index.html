@@ -1,72 +1,842 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Full Screen | b.png Background</title>
-  <style>
-    /* COMPLETE RESET - NO MARGINS, NO PADDING, NO SCROLLBARS */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GoldRush - Pakistan Betting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #080b12; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; }
+        .app { max-width: 420px; width: 100%; background: radial-gradient(ellipse at 50% 0%, #1a1a2e, #0b0e17); border-radius: 48px; padding: 24px 20px 30px; border: 1px solid rgba(255,215,0,0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.9); position: relative; overflow: hidden; }
+        .app::before { content: ''; position: absolute; top: -60%; right: -40%; width: 180%; height: 180%; background: radial-gradient(circle, rgba(255,215,0,0.02), transparent 70%); pointer-events: none; }
 
-    /* FULL SCREEN HTML & BODY */
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;     /* removes all scrollbars - pure fullscreen */
-    }
+        /* ===== HEADER ===== */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; position: relative; z-index: 2; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #ffd700, #b8860b); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #0b0e17; box-shadow: 0 6px 24px rgba(255,215,0,0.25); }
+        .logo-text { font-size: 22px; font-weight: 800; color: #fff; }
+        .logo-text span { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.2); }
+        .level-badge { background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.06); padding: 4px 12px; border-radius: 100px; font-size: 11px; color: #ffd700; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .level-badge i { color: #ffd700; font-size: 10px; }
 
-    body {
-      background-color: #000000;  /* pure black fallback - no text */
-    }
+        /* ===== PROFILE ===== */
+        .profile-gold { display: flex; align-items: center; gap: 12px; background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.04); border-radius: 60px; padding: 6px 12px 6px 6px; margin-bottom: 16px; position: relative; z-index: 2; }
+        .profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ffd700, #b8860b); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #0b0e17; box-shadow: 0 4px 16px rgba(255,215,0,0.2); }
+        .profile-info { flex: 1; }
+        .profile-name { font-size: 15px; font-weight: 700; color: #fff; }
+        .profile-name i { color: #ffd700; font-size: 12px; margin-left: 4px; }
+        .profile-rank { font-size: 12px; color: #ffd700; font-weight: 500; letter-spacing: 0.3px; }
+        .profile-rank i { margin-right: 4px; }
+        .logout-btn { background: rgba(255,59,92,0.1); border: 1px solid rgba(255,59,92,0.1); color: #ff3b5c; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .logout-btn:hover { background: rgba(255,59,92,0.2); }
 
-    /* DIRECT FULL SCREEN BACKGROUND IMAGE */
-    .full-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
+        /* ===== BALANCE ===== */
+        .balance-panel { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.04); border-radius: 18px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; backdrop-filter: blur(2px); position: relative; z-index: 2; }
+        .balance-label { color: #8a8a9a; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .balance-label i { color: #ffd700; }
+        .balance-amount { font-size: 26px; font-weight: 700; color: #fff; }
+        .balance-amount span { font-size: 14px; color: #6a6a7a; font-weight: 400; }
 
-    /* IMAGE STYLES - CRISP, NO BLUR, FULL COVERAGE, NO GAPS */
-    .full-bg img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;     /* covers entire screen without distortion */
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+        /* ===== MULTIPLIER ===== */
+        .multiplier-box { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 22px 16px 18px; text-align: center; border: 1px solid rgba(255,215,0,0.04); margin-bottom: 16px; position: relative; z-index: 2; }
+        .multiplier-label { color: #5a5a6a; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .multiplier-value { font-size: 64px; font-weight: 800; color: #ffd700; line-height: 1.1; transition: color 0.2s; font-variant-numeric: tabular-nums; text-shadow: 0 0 30px rgba(255,215,0,0.1); }
+        .multiplier-value.crashed { color: #ff3b5c; text-shadow: 0 0 30px rgba(255,59,92,0.2); }
+        .multiplier-sub { color: #5a5a6a; font-size: 13px; margin-top: 4px; }
+        .multiplier-sub i { margin-right: 6px; color: #ffd700; }
 
-    /* ABSOLUTELY NO TEXT, NO WATERMARK, NO OVERLAY */
-    /* Pure background only - clean and simple */
-  </style>
+        /* ===== ROCKET ANIMATION ===== */
+        .rocket-area { height: 60px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; position: relative; z-index: 2; }
+        .rocket { font-size: 48px; transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .rocket.crash { transform: translateY(20px) rotate(180deg) scale(0.8); color: #ff3b5c; }
+        .rocket.fire { animation: rocketFire 0.3s infinite alternate; }
+        @keyframes rocketFire { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+
+        /* ===== BET PRESETS ===== */
+        .bet-presets { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; position: relative; z-index: 2; }
+        .bet-preset { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); color: #8a8a9a; padding: 8px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .bet-preset:hover { background: rgba(255,215,0,0.04); color: #c0c0d0; }
+        .bet-preset.active { background: rgba(255,215,0,0.08); color: #ffd700; border-color: rgba(255,215,0,0.12); }
+
+        /* ===== BUTTONS ===== */
+        .action-row { display: flex; gap: 12px; margin-bottom: 14px; position: relative; z-index: 2; }
+        .btn-primary { flex: 1; padding: 16px 0; border: none; border-radius: 60px; font-size: 17px; font-weight: 700; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, #ffd700, #b8860b); color: #0b0e17; box-shadow: 0 6px 24px rgba(255,215,0,0.12); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(255,215,0,0.2); }
+        .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+        .btn-secondary { flex: 1; padding: 16px 0; border: none; border-radius: 60px; font-size: 17px; font-weight: 700; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.02); color: #8a8a9a; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-secondary:hover:not(:disabled) { background: rgba(255,255,255,0.04); color: #c0c0d0; }
+        .btn-secondary:disabled { opacity: 0.2; cursor: not-allowed; }
+
+        .finance-row { display: flex; gap: 10px; margin-bottom: 14px; position: relative; z-index: 2; }
+        .btn-recharge { flex: 1; padding: 12px 0; border: none; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, #ffd700, #b8860b); color: #0b0e17; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 16px rgba(255,215,0,0.08); }
+        .btn-recharge:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.15); }
+        .btn-withdraw { flex: 1; padding: 12px 0; border: none; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.02); color: #8a8a9a; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-withdraw:hover { background: rgba(255,255,255,0.04); color: #c0c0d0; }
+
+        /* ===== CRASH HISTORY ===== */
+        .crash-history { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 6px; position: relative; z-index: 2; }
+        .crash-dot { width: 34px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.02); color: #5a5a6a; border: 1px solid rgba(255,255,255,0.03); }
+        .crash-dot.green { background: rgba(255,215,0,0.06); color: #ffd700; border-color: rgba(255,215,0,0.06); }
+        .crash-dot.red { background: rgba(255,59,92,0.06); color: #ff3b5c; border-color: rgba(255,59,92,0.06); }
+
+        /* ===== MODAL ===== */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #12161f; border-radius: 32px; padding: 30px 24px; max-width: 400px; width: 100%; border: 1px solid rgba(255,215,0,0.04); box-shadow: 0 40px 80px rgba(0,0,0,0.9); max-height: 90vh; overflow-y: auto; }
+        .modal-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .modal-title span { color: #ffd700; }
+        .modal-sub { color: #6a6a7a; font-size: 14px; margin-bottom: 18px; }
+        .modal-input-group { margin-bottom: 14px; }
+        .modal-input-group label { display: block; color: #8a8a9a; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+        .modal-input-group input { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; color: #fff; font-size: 15px; outline: none; transition: 0.2s; }
+        .modal-input-group input:focus { border-color: rgba(255,215,0,0.15); }
+        .modal-input-group input::placeholder { color: #4a4a5a; }
+        .modal-amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+        .modal-amount-btn { padding: 12px 0; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; background: rgba(255,255,255,0.02); color: #8a8a9a; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .modal-amount-btn:hover { background: rgba(255,215,0,0.04); border-color: rgba(255,215,0,0.08); color: #ffd700; }
+        .modal-amount-btn.active { background: rgba(255,215,0,0.08); border-color: rgba(255,215,0,0.15); color: #ffd700; }
+        .modal-actions { display: flex; gap: 10px; }
+        .modal-actions .btn-primary { flex: 2; padding: 14px 0; font-size: 16px; }
+        .modal-actions .btn-secondary { flex: 1; padding: 14px 0; font-size: 16px; }
+        .modal-close { background: transparent; border: none; color: #6a6a7a; font-size: 24px; cursor: pointer; float: right; }
+        .modal-close:hover { color: #fff; }
+
+        .toggle-link { color: #ffd700; cursor: pointer; text-decoration: underline; font-weight: 600; }
+        .toggle-link:hover { color: #fff; }
+
+        @media (max-width: 440px) {
+            .app { padding: 18px 14px 24px; border-radius: 32px; }
+            .logo-text { font-size: 18px; }
+            .multiplier-value { font-size: 48px; }
+            .balance-amount { font-size: 20px; }
+            .bet-preset { font-size: 12px; padding: 6px 10px; }
+            .modal-amount-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- DIRECT IMAGE FROM SAME FOLDER - b.png (NO IMG FOLDER) -->
-  <div class="full-bg">
-    <img src="b.png" alt="" aria-hidden="true">
-  </div>
+    <!-- ===== LOGIN SCREEN (Hidden by default) ===== -->
+    <div class="app" id="loginScreen">
+        <div class="header" style="justify-content:center;">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                <div class="logo-text">Gold<span>Rush</span></div>
+            </div>
+        </div>
+        <div style="text-align:center; margin: 20px 0 10px; color:#ffd700; font-size:18px; font-weight:700;">LOGIN</div>
 
-  <!-- SILENT ERROR HANDLER - NO VISIBLE TEXT ON SCREEN -->
-  <script>
-    (function() {
-      const bgImage = document.querySelector('.full-bg img');
-      
-      // If image fails to load, keep clean black background - NO text appears on screen
-      bgImage.onerror = function() {
-        // Silent fail - only console log for debugging (invisible to user)
-        console.log("Note: b.png not found. Make sure 'b.png' is in the same folder as this HTML file");
-        // Keep background pure black - no visible messages
-      };
-    })();
-  </script>
+        <div class="modal-input-group">
+            <label><i class="fas fa-user"></i> Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter username" />
+        </div>
+        <div class="modal-input-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" />
+        </div>
+
+        <div class="modal-actions" style="margin-top:10px;">
+            <button class="btn-primary" id="loginBtn" style="flex:1;"><i class="fas fa-sign-in-alt"></i> LOGIN</button>
+        </div>
+        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">
+            Don't have an account? <span class="toggle-link" id="showRegister">Register</span>
+        </div>
+        <div id="loginMessage" style="text-align:center; margin-top:10px; font-size:14px; color:#ff3b5c;"></div>
+    </div>
+
+    <!-- ===== REGISTER SCREEN (Hidden by default) ===== -->
+    <div class="app" id="registerScreen" style="display:none;">
+        <div class="header" style="justify-content:center;">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                <div class="logo-text">Gold<span>Rush</span></div>
+            </div>
+        </div>
+        <div style="text-align:center; margin: 20px 0 10px; color:#ffd700; font-size:18px; font-weight:700;">REGISTER</div>
+
+        <div class="modal-input-group">
+            <label><i class="fas fa-user"></i> Username</label>
+            <input type="text" id="registerUsername" placeholder="Choose username" />
+        </div>
+        <div class="modal-input-group">
+            <label><i class="fas fa-lock"></i> Password</label>
+            <input type="password" id="registerPassword" placeholder="Choose password" />
+        </div>
+        <div class="modal-input-group">
+            <label><i class="fas fa-lock"></i> Confirm Password</label>
+            <input type="password" id="registerConfirm" placeholder="Confirm password" />
+        </div>
+
+        <div class="modal-actions" style="margin-top:10px;">
+            <button class="btn-primary" id="registerBtn" style="flex:1;"><i class="fas fa-user-plus"></i> REGISTER</button>
+        </div>
+        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">
+            Already have an account? <span class="toggle-link" id="showLogin">Login</span>
+        </div>
+        <div id="registerMessage" style="text-align:center; margin-top:10px; font-size:14px; color:#ff3b5c;"></div>
+    </div>
+
+    <!-- ===== MAIN GAME APP (Hidden by default) ===== -->
+    <div class="app" id="gameApp" style="display:none;">
+
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                <div class="logo-text">Gold<span>Rush</span></div>
+            </div>
+            <div class="level-badge"><i class="fas fa-star"></i> LVL <span id="userLevel">1</span></div>
+        </div>
+
+        <div class="profile-gold">
+            <div class="profile-avatar">👑</div>
+            <div class="profile-info">
+                <div class="profile-name" id="profileName">Player <i class="fas fa-bolt"></i></div>
+                <div class="profile-rank"><i class="fas fa-trophy"></i> <span id="userRank">Level 1</span> · <span id="userWins">0</span> WINS</div>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> LOGOUT</button>
+        </div>
+
+        <div class="balance-panel">
+            <div class="balance-label"><i class="fas fa-wallet"></i> BALANCE</div>
+            <div class="balance-amount" id="balanceDisplay">100 <span>PKR</span></div>
+        </div>
+
+        <!-- ROCKET ANIMATION -->
+        <div class="rocket-area">
+            <div class="rocket" id="rocketIcon">🚀</div>
+        </div>
+
+        <div class="multiplier-box">
+            <div class="multiplier-label">CURRENT MULTIPLIER</div>
+            <div class="multiplier-value" id="multiplierDisplay">1.00x</div>
+            <div class="multiplier-sub"><i class="fas fa-clock"></i> Next round in <span id="countdownDisplay">5</span>s</div>
+        </div>
+
+        <div class="bet-presets">
+            <button class="bet-preset active" data-amount="100">100 PKR</button>
+            <button class="bet-preset" data-amount="200">200 PKR</button>
+            <button class="bet-preset" data-amount="300">300 PKR</button>
+            <button class="bet-preset" data-amount="500">500 PKR</button>
+            <button class="bet-preset" data-amount="1000">1000 PKR</button>
+            <button class="bet-preset" data-amount="2000">2000 PKR</button>
+            <button class="bet-preset" data-amount="5000">5000 PKR</button>
+        </div>
+
+        <div class="action-row">
+            <button class="btn-primary" id="placeBetBtn"><i class="fas fa-play"></i> PLACE BET</button>
+            <button class="btn-secondary" id="cashOutBtn" disabled><i class="fas fa-hand-holding-usd"></i> CASH OUT</button>
+        </div>
+
+        <div class="finance-row">
+            <button class="btn-recharge" id="rechargeBtn"><i class="fas fa-plus-circle"></i> RECHARGE</button>
+            <button class="btn-withdraw" id="withdrawBtn"><i class="fas fa-arrow-right"></i> WITHDRAW</button>
+        </div>
+
+        <!-- CHANGE PASSWORD -->
+        <div style="text-align:center; margin-bottom:10px; z-index:2; position:relative;">
+            <span class="toggle-link" id="showChangePassword" style="font-size:13px;"><i class="fas fa-key"></i> Change Password</span>
+        </div>
+
+        <div class="crash-history" id="crashHistory">
+            <div class="crash-dot">--</div>
+            <div class="crash-dot">--</div>
+            <div class="crash-dot">--</div>
+            <div class="crash-dot">--</div>
+            <div class="crash-dot">--</div>
+            <div class="crash-dot">--</div>
+        </div>
+    </div>
+
+    <!-- ===== CHANGE PASSWORD MODAL ===== -->
+    <div class="modal-overlay" id="changePasswordModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeChangePasswordModal">✕</button>
+            <div class="modal-title">Change <span>Password</span></div>
+            <div class="modal-sub">Enter your current and new password</div>
+            <div class="modal-input-group">
+                <label><i class="fas fa-lock"></i> Current Password</label>
+                <input type="password" id="currentPassword" placeholder="Enter current password" />
+            </div>
+            <div class="modal-input-group">
+                <label><i class="fas fa-lock"></i> New Password</label>
+                <input type="password" id="newPassword" placeholder="Enter new password" />
+            </div>
+            <div class="modal-input-group">
+                <label><i class="fas fa-lock"></i> Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" placeholder="Confirm new password" />
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary" id="confirmChangePassword"><i class="fas fa-check"></i> UPDATE PASSWORD</button>
+                <button class="btn-secondary" id="cancelChangePassword">CANCEL</button>
+            </div>
+            <div id="changePassMessage" style="text-align:center; margin-top:10px; font-size:14px; color:#ff3b5c;"></div>
+        </div>
+    </div>
+
+    <!-- ===== RECHARGE MODAL ===== -->
+    <div class="modal-overlay" id="rechargeModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeRechargeModal">✕</button>
+            <div class="modal-title">Recharge <span>Wallet</span></div>
+            <div class="modal-sub">Select amount &amp; enter payment details</div>
+            <div class="modal-amount-grid" id="rechargeGrid">
+                <button class="modal-amount-btn" data-amount="100">100 PKR</button>
+                <button class="modal-amount-btn" data-amount="200">200 PKR</button>
+                <button class="modal-amount-btn" data-amount="300">300 PKR</button>
+                <button class="modal-amount-btn" data-amount="500">500 PKR</button>
+                <button class="modal-amount-btn" data-amount="1000">1000 PKR</button>
+                <button class="modal-amount-btn" data-amount="2000">2000 PKR</button>
+                <button class="modal-amount-btn" data-amount="5000" style="grid-column: span 2;">5000 PKR</button>
+            </div>
+            <div class="modal-input-group"><label><i class="fas fa-user"></i> Account Holder Name</label><input type="text" id="rechargeName" placeholder="e.g. Zafar Ali" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-hashtag"></i> JazzCash / EasyPaisa Number</label><input type="text" id="rechargeNumber" placeholder="e.g. 03XX-XXXXXXX" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-money-bill-wave"></i> Amount (PKR)</label><input type="text" id="rechargeAmountInput" placeholder="e.g. 500" /></div>
+            <div class="modal-actions">
+                <button class="btn-primary" id="confirmRecharge"><i class="fas fa-check"></i> CONFIRM RECHARGE</button>
+                <button class="btn-secondary" id="cancelRecharge">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== WITHDRAW MODAL ===== -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeWithdrawModal">✕</button>
+            <div class="modal-title">Withdraw <span>Funds</span></div>
+            <div class="modal-sub">Select amount &amp; enter withdrawal details</div>
+            <div class="modal-amount-grid" id="withdrawGrid">
+                <button class="modal-amount-btn" data-amount="100">100 PKR</button>
+                <button class="modal-amount-btn" data-amount="200">200 PKR</button>
+                <button class="modal-amount-btn" data-amount="300">300 PKR</button>
+                <button class="modal-amount-btn" data-amount="500">500 PKR</button>
+                <button class="modal-amount-btn" data-amount="1000">1000 PKR</button>
+                <button class="modal-amount-btn" data-amount="2000">2000 PKR</button>
+                <button class="modal-amount-btn" data-amount="5000" style="grid-column: span 2;">5000 PKR</button>
+            </div>
+            <div class="modal-input-group"><label><i class="fas fa-user"></i> Account Holder Name</label><input type="text" id="withdrawName" placeholder="e.g. Zafar Ali" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-hashtag"></i> JazzCash / EasyPaisa Number</label><input type="text" id="withdrawNumber" placeholder="e.g. 03XX-XXXXXXX" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-money-bill-wave"></i> Amount (PKR)</label><input type="text" id="withdrawAmountInput" placeholder="e.g. 500" /></div>
+            <div class="modal-actions">
+                <button class="btn-primary" id="confirmWithdraw"><i class="fas fa-check"></i> CONFIRM WITHDRAW</button>
+                <button class="btn-secondary" id="cancelWithdraw">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== LOCAL STORAGE USER SYSTEM =====
+            function getUsers() {
+                return JSON.parse(localStorage.getItem('goldRushUsers')) || {};
+            }
+
+            function saveUsers(users) {
+                localStorage.setItem('goldRushUsers', JSON.stringify(users));
+            }
+
+            function getCurrentUser() {
+                return localStorage.getItem('goldRushCurrentUser') || null;
+            }
+
+            function setCurrentUser(username) {
+                if (username) localStorage.setItem('goldRushCurrentUser', username);
+                else localStorage.removeItem('goldRushCurrentUser');
+            }
+
+            function getUserData(username) {
+                const users = getUsers();
+                return users[username] || null;
+            }
+
+            function saveUserData(username, data) {
+                const users = getUsers();
+                users[username] = data;
+                saveUsers(users);
+            }
+
+            // ===== INITIALIZE DEFAULT USERS =====
+            function initDefaultUsers() {
+                const users = getUsers();
+                if (!users['admin']) {
+                    users['admin'] = {
+                        password: 'admin123',
+                        balance: 100,
+                        level: 1,
+                        wins: 0,
+                        rank: 'Level 1'
+                    };
+                    saveUsers(users);
+                }
+            }
+            initDefaultUsers();
+
+            // ===== DOM REFS =====
+            const loginScreen = document.getElementById('loginScreen');
+            const registerScreen = document.getElementById('registerScreen');
+            const gameApp = document.getElementById('gameApp');
+            const loginUsername = document.getElementById('loginUsername');
+            const loginPassword = document.getElementById('loginPassword');
+            const registerUsername = document.getElementById('registerUsername');
+            const registerPassword = document.getElementById('registerPassword');
+            const registerConfirm = document.getElementById('registerConfirm');
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+            const loginMessage = document.getElementById('loginMessage');
+            const registerMessage = document.getElementById('registerMessage');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // ===== SWITCH SCREENS =====
+            function showLoginScreen() {
+                loginScreen.style.display = 'block';
+                registerScreen.style.display = 'none';
+                gameApp.style.display = 'none';
+                loginMessage.textContent = '';
+                loginUsername.value = '';
+                loginPassword.value = '';
+            }
+
+            function showRegisterScreen() {
+                loginScreen.style.display = 'none';
+                registerScreen.style.display = 'block';
+                gameApp.style.display = 'none';
+                registerMessage.textContent = '';
+                registerUsername.value = '';
+                registerPassword.value = '';
+                registerConfirm.value = '';
+            }
+
+            function showGameApp(username) {
+                loginScreen.style.display = 'none';
+                registerScreen.style.display = 'none';
+                gameApp.style.display = 'block';
+                setCurrentUser(username);
+                loadUserProfile(username);
+            }
+
+            showRegister.addEventListener('click', showRegisterScreen);
+            showLogin.addEventListener('click', showLoginScreen);
+
+            // ===== LOGIN =====
+            loginBtn.addEventListener('click', function() {
+                const username = loginUsername.value.trim();
+                const password = loginPassword.value.trim();
+                if (!username || !password) { loginMessage.textContent = '⚠️ Please enter all fields.'; return; }
+                const user = getUserData(username);
+                if (!user) { loginMessage.textContent = '❌ User not found.'; return; }
+                if (user.password !== password) { loginMessage.textContent = '❌ Incorrect password.'; return; }
+                loginMessage.textContent = '✅ Login successful!';
+                setTimeout(() => showGameApp(username), 300);
+            });
+
+            // ===== REGISTER =====
+            registerBtn.addEventListener('click', function() {
+                const username = registerUsername.value.trim();
+                const password = registerPassword.value.trim();
+                const confirm = registerConfirm.value.trim();
+                if (!username || !password || !confirm) { registerMessage.textContent = '⚠️ Please fill all fields.'; return; }
+                if (password.length < 4) { registerMessage.textContent = '❌ Password must be at least 4 characters.'; return; }
+                if (password !== confirm) { registerMessage.textContent = '❌ Passwords do not match.'; return; }
+                const users = getUsers();
+                if (users[username]) { registerMessage.textContent = '❌ Username already exists.'; return; }
+                users[username] = { password: password, balance: 100, level: 1, wins: 0, rank: 'Level 1' };
+                saveUsers(users);
+                registerMessage.textContent = '✅ Registration successful! Please login.';
+                setTimeout(() => showLoginScreen(), 500);
+            });
+
+            // ===== LOGOUT =====
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    setCurrentUser(null);
+                    showLoginScreen();
+                }
+            });
+
+            // ===== LOAD USER PROFILE =====
+            function loadUserProfile(username) {
+                const data = getUserData(username);
+                if (!data) return;
+                document.getElementById('profileName').textContent = username + ' 👑';
+                document.getElementById('balanceDisplay').innerHTML = data.balance.toLocaleString() + ' <span>PKR</span>';
+                document.getElementById('userLevel').textContent = data.level || 1;
+                document.getElementById('userRank').textContent = data.rank || 'Level ' + (data.level || 1);
+                document.getElementById('userWins').textContent = data.wins || 0;
+                window._currentUser = username;
+                window._userData = data;
+                window._balance = data.balance;
+            }
+
+            // ===== SAVE USER DATA =====
+            function saveCurrentUserData() {
+                if (!window._currentUser || !window._userData) return;
+                window._userData.balance = window._balance;
+                saveUserData(window._currentUser, window._userData);
+            }
+
+            // ===== CHANGE PASSWORD =====
+            const changePassModal = document.getElementById('changePasswordModal');
+            const showChangePassword = document.getElementById('showChangePassword');
+            const closeChangePass = document.getElementById('closeChangePasswordModal');
+            const cancelChangePass = document.getElementById('cancelChangePassword');
+            const confirmChangePass = document.getElementById('confirmChangePassword');
+            const currentPassInput = document.getElementById('currentPassword');
+            const newPassInput = document.getElementById('newPassword');
+            const confirmNewPassInput = document.getElementById('confirmNewPassword');
+            const changePassMsg = document.getElementById('changePassMessage');
+
+            showChangePassword.addEventListener('click', function() {
+                changePassModal.classList.add('active');
+                currentPassInput.value = '';
+                newPassInput.value = '';
+                confirmNewPassInput.value = '';
+                changePassMsg.textContent = '';
+            });
+
+            function closeChangePassModal() {
+                changePassModal.classList.remove('active');
+            }
+            closeChangePass.addEventListener('click', closeChangePassModal);
+            cancelChangePass.addEventListener('click', closeChangePassModal);
+
+            confirmChangePass.addEventListener('click', function() {
+                const current = currentPassInput.value.trim();
+                const newPass = newPassInput.value.trim();
+                const confirm = confirmNewPassInput.value.trim();
+                if (!current || !newPass || !confirm) { changePassMsg.textContent = '⚠️ Please fill all fields.'; return; }
+                if (newPass.length < 4) { changePassMsg.textContent = '❌ Password must be at least 4 characters.'; return; }
+                if (newPass !== confirm) { changePassMsg.textContent = '❌ Passwords do not match.'; return; }
+                const user = getUserData(window._currentUser);
+                if (!user || user.password !== current) { changePassMsg.textContent = '❌ Current password is incorrect.'; return; }
+                user.password = newPass;
+                saveUserData(window._currentUser, user);
+                changePassMsg.textContent = '✅ Password updated successfully!';
+                changePassMsg.style.color = '#4caf50';
+                setTimeout(() => { closeChangePassModal(); changePassMsg.textContent = ''; changePassMsg.style.color = '#ff3b5c'; }, 1000);
+            });
+
+            // ===== GAME ENGINE =====
+            const balanceDisplay = document.getElementById('balanceDisplay');
+            const multiplierDisplay = document.getElementById('multiplierDisplay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const crashHistoryContainer = document.getElementById('crashHistory');
+            const rocketIcon = document.getElementById('rocketIcon');
+
+            const betPresets = document.querySelectorAll('.bet-preset');
+            const placeBetBtn = document.getElementById('placeBetBtn');
+            const cashOutBtn = document.getElementById('cashOutBtn');
+            const rechargeBtn = document.getElementById('rechargeBtn');
+            const withdrawBtn = document.getElementById('withdrawBtn');
+
+            const rechargeModal = document.getElementById('rechargeModal');
+            const withdrawModal = document.getElementById('withdrawModal');
+
+            const rechargeAmounts = document.querySelectorAll('#rechargeGrid .modal-amount-btn');
+            const withdrawAmounts = document.querySelectorAll('#withdrawGrid .modal-amount-btn');
+
+            const rechargeName = document.getElementById('rechargeName');
+            const rechargeNumber = document.getElementById('rechargeNumber');
+            const rechargeAmountInput = document.getElementById('rechargeAmountInput');
+            const withdrawName = document.getElementById('withdrawName');
+            const withdrawNumber = document.getElementById('withdrawNumber');
+            const withdrawAmountInput = document.getElementById('withdrawAmountInput');
+
+            const confirmRecharge = document.getElementById('confirmRecharge');
+            const confirmWithdraw = document.getElementById('confirmWithdraw');
+            const cancelRecharge = document.getElementById('cancelRecharge');
+            const cancelWithdraw = document.getElementById('cancelWithdraw');
+            const closeRechargeModal = document.getElementById('closeRechargeModal');
+            const closeWithdrawModal = document.getElementById('closeWithdrawModal');
+
+            let currentBet = 100;
+            let isRoundActive = false;
+            let isCrashed = false;
+            let currentMultiplier = 1.00;
+            let countdown = 5;
+            let roundInterval = null;
+            let countdownInterval = null;
+            let selectedRecharge = 0;
+            let selectedWithdraw = 0;
+
+            // ===== AUDIO =====
+            function playCrashSound() {
+                try {
+                    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 1.2);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 1.2);
+                } catch (e) { /* fallback silence */ }
+            }
+
+            function playCashOutSound() {
+                try {
+                    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
+                } catch (e) { /* fallback */ }
+            }
+
+            // ===== UI UPDATE =====
+            function updateUI() {
+                balanceDisplay.innerHTML = window._balance.toLocaleString() + ' <span>PKR</span>';
+                multiplierDisplay.textContent = currentMultiplier.toFixed(2) + 'x';
+            }
+
+            function addCrashToHistory(val) {
+                const el = document.createElement('div');
+                el.className = 'crash-dot ' + (val >= 1.1 && val < 2.0 ? 'green' : 'red');
+                el.textContent = val.toFixed(1) + 'x';
+                crashHistoryContainer.appendChild(el);
+                if (crashHistoryContainer.children.length > 12) {
+                    crashHistoryContainer.removeChild(crashHistoryContainer.firstChild);
+                }
+            }
+
+            // ===== GAME ENGINE =====
+            function startRound() {
+                if (isRoundActive) return;
+                if (window._balance < currentBet) {
+                    alert('Insufficient balance! Please recharge.');
+                    return;
+                }
+                window._balance -= currentBet;
+                isRoundActive = true;
+                isCrashed = false;
+                currentMultiplier = 1.00;
+                updateUI();
+                saveCurrentUserData();
+                placeBetBtn.disabled = true;
+                cashOutBtn.disabled = false;
+                rocketIcon.className = 'rocket';
+                rocketIcon.textContent = '🚀';
+                countdown = 5;
+                countdownDisplay.textContent = countdown;
+                clearInterval(countdownInterval);
+                countdownInterval = setInterval(() => {
+                    countdown--;
+                    countdownDisplay.textContent = countdown;
+                    if (countdown <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownDisplay.textContent = 'GO!';
+                        startMultiplier();
+                    }
+                }, 1000);
+            }
+
+            function startMultiplier() {
+                const crashPoint = 1.00 + (Math.random() * 0.90) + 0.10;
+                let target = 1.00;
+                let step = 0.012 + (Math.random() * 0.008);
+                clearInterval(roundInterval);
+                roundInterval = setInterval(() => {
+                    target += step;
+                    currentMultiplier = Math.min(target, crashPoint);
+                    multiplierDisplay.textContent = currentMultiplier.toFixed(2) + 'x';
+                    // Rocket fire animation
+                    if (currentMultiplier > 1.05) {
+                        rocketIcon.classList.add('fire');
+                    } else {
+                        rocketIcon.classList.remove('fire');
+                    }
+                    if (currentMultiplier >= crashPoint || currentMultiplier >= 2.00) {
+                        crashRound();
+                    }
+                }, 60);
+            }
+
+            function crashRound() {
+                clearInterval(roundInterval);
+                isCrashed = true;
+                isRoundActive = false;
+                multiplierDisplay.classList.add('crashed');
+                rocketIcon.classList.remove('fire');
+                rocketIcon.classList.add('crash');
+                rocketIcon.textContent = '💥';
+                playCrashSound();
+                const crashVal = currentMultiplier;
+                addCrashToHistory(crashVal);
+                placeBetBtn.disabled = false;
+                cashOutBtn.disabled = true;
+                // Increase wins count
+                if (window._userData) {
+                    window._userData.wins = (window._userData.wins || 0) + 1;
+                    document.getElementById('userWins').textContent = window._userData.wins;
+                    // Level up: every 5 wins = +1 level
+                    const newLevel = Math.floor(window._userData.wins / 5) + 1;
+                    window._userData.level = newLevel;
+                    window._userData.rank = 'Level ' + newLevel;
+                    document.getElementById('userLevel').textContent = newLevel;
+                    document.getElementById('userRank').textContent = 'Level ' + newLevel;
+                    saveCurrentUserData();
+                }
+                setTimeout(() => {
+                    multiplierDisplay.classList.remove('crashed');
+                    rocketIcon.className = 'rocket';
+                    rocketIcon.textContent = '🚀';
+                    currentMultiplier = 1.00;
+                    multiplierDisplay.textContent = '1.00x';
+                    countdownDisplay.textContent = '5';
+                    updateUI();
+                }, 800);
+            }
+
+            function cashOut() {
+                if (!isRoundActive || isCrashed) return;
+                const winnings = Math.floor(currentBet * currentMultiplier);
+                window._balance += winnings;
+                isRoundActive = false;
+                clearInterval(roundInterval);
+                cashOutBtn.disabled = true;
+                placeBetBtn.disabled = false;
+                playCashOutSound();
+                addCrashToHistory(currentMultiplier);
+                updateUI();
+                saveCurrentUserData();
+                countdownDisplay.textContent = 'Cashed!';
+                rocketIcon.className = 'rocket';
+                rocketIcon.textContent = '🤑';
+                setTimeout(() => {
+                    countdownDisplay.textContent = '5';
+                    rocketIcon.textContent = '🚀';
+                    currentMultiplier = 1.00;
+                    multiplierDisplay.textContent = '1.00x';
+                }, 500);
+            }
+
+            // ===== BET PRESETS =====
+            betPresets.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    betPresets.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentBet = parseInt(this.dataset.amount);
+                });
+            });
+
+            // ===== MODALS =====
+            function openRecharge() {
+                rechargeModal.classList.add('active');
+                selectedRecharge = 0;
+                rechargeAmounts.forEach(b => b.classList.remove('active'));
+                rechargeName.value = '';
+                rechargeNumber.value = '';
+                rechargeAmountInput.value = '';
+            }
+
+            function openWithdraw() {
+                if (window._balance < 100) {
+                    alert('Minimum withdrawal is 100 PKR.');
+                    return;
+                }
+                withdrawModal.classList.add('active');
+                selectedWithdraw = 0;
+                withdrawAmounts.forEach(b => b.classList.remove('active'));
+                withdrawName.value = '';
+                withdrawNumber.value = '';
+                withdrawAmountInput.value = '';
+            }
+
+            function closeModals() {
+                rechargeModal.classList.remove('active');
+                withdrawModal.classList.remove('active');
+            }
+
+            rechargeAmounts.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    rechargeAmounts.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedRecharge = parseInt(this.dataset.amount);
+                    rechargeAmountInput.value = selectedRecharge;
+                });
+            });
+
+            withdrawAmounts.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    withdrawAmounts.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedWithdraw = parseInt(this.dataset.amount);
+                    withdrawAmountInput.value = selectedWithdraw;
+                });
+            });
+
+            confirmRecharge.addEventListener('click', function() {
+                const name = rechargeName.value.trim();
+                const number = rechargeNumber.value.trim();
+                const amount = parseInt(rechargeAmountInput.value.trim()) || selectedRecharge;
+                if (!name || !number || !amount) { alert('Please fill all fields.'); return; }
+                window._balance += amount;
+                updateUI();
+                saveCurrentUserData();
+                alert('✅ Recharge Successful! Amount: ' + amount + ' PKR\nAccount: ' + name + '\nNumber: ' + number);
+                closeModals();
+            });
+
+            confirmWithdraw.addEventListener('click', function() {
+                const name = withdrawName.value.trim();
+                const number = withdrawNumber.value.trim();
+                const amount = parseInt(withdrawAmountInput.value.trim()) || selectedWithdraw;
+                if (!name || !number || !amount) { alert('Please fill all fields.'); return; }
+                if (amount > window._balance) { alert('Insufficient balance!'); return; }
+                window._balance -= amount;
+                updateUI();
+                saveCurrentUserData();
+                alert('✅ Withdrawal Request Submitted! Amount: ' + amount + ' PKR\nAccount: ' + name + '\nNumber: ' +
+                    number);
+                closeModals();
+            });
+
+            cancelRecharge.addEventListener('click', closeModals);
+            cancelWithdraw.addEventListener('click', closeModals);
+            closeRechargeModal.addEventListener('click', closeModals);
+            closeWithdrawModal.addEventListener('click', closeModals);
+            rechargeBtn.addEventListener('click', openRecharge);
+            withdrawBtn.addEventListener('click', openWithdraw);
+
+            // ===== EVENTS =====
+            placeBetBtn.addEventListener('click', startRound);
+            cashOutBtn.addEventListener('click', cashOut);
+
+            // ===== AUTO-LOGIN CHECK =====
+            const savedUser = getCurrentUser();
+            if (savedUser && getUserData(savedUser)) {
+                showGameApp(savedUser);
+            } else {
+                showLoginScreen();
+            }
+
+            // ===== INIT HISTORY =====
+            function initHistory() {
+                const hist = [1.2, 1.8, 1.0, 1.5, 1.3, 2.0];
+                hist.forEach(v => {
+                    const el = document.createElement('div');
+                    el.className = 'crash-dot ' + (v >= 1.1 && v < 2.0 ? 'green' : 'red');
+                    el.textContent = v.toFixed(1) + 'x';
+                    crashHistoryContainer.appendChild(el);
+                });
+            }
+            if (crashHistoryContainer.children.length === 0) initHistory();
+
+        })();
+    </script>
 </body>
 </html>
