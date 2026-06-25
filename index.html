@@ -11,34 +11,28 @@
         .app { max-width: 420px; width: 100%; background: radial-gradient(ellipse at 50% 0%, #1a1a2e, #0b0e17); border-radius: 48px; padding: 24px 20px 30px; border: 1px solid rgba(255,215,0,0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.9); position: relative; overflow: hidden; }
         .app::before { content: ''; position: absolute; top: -60%; right: -40%; width: 180%; height: 180%; background: radial-gradient(circle, rgba(255,215,0,0.02), transparent 70%); pointer-events: none; }
 
-        /* ===== HEADER ===== */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; position: relative; z-index: 2; }
         .logo { display: flex; align-items: center; gap: 10px; }
         .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, #ffd700, #b8860b); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #0b0e17; box-shadow: 0 6px 24px rgba(255,215,0,0.25); }
-        .logo-text { font-size: 22px; font-weight: 800; color: #fff; }
+        .logo-text { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
         .logo-text span { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.2); }
         .level-badge { background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.06); padding: 4px 12px; border-radius: 100px; font-size: 11px; color: #ffd700; font-weight: 600; display: flex; align-items: center; gap: 4px; }
-        .level-badge i { color: #ffd700; font-size: 10px; }
 
-        /* ===== PROFILE ===== */
         .profile-gold { display: flex; align-items: center; gap: 12px; background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.04); border-radius: 60px; padding: 6px 12px 6px 6px; margin-bottom: 16px; position: relative; z-index: 2; }
         .profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ffd700, #b8860b); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #0b0e17; box-shadow: 0 4px 16px rgba(255,215,0,0.2); }
         .profile-info { flex: 1; }
         .profile-name { font-size: 15px; font-weight: 700; color: #fff; }
         .profile-name i { color: #ffd700; font-size: 12px; margin-left: 4px; }
         .profile-rank { font-size: 12px; color: #ffd700; font-weight: 500; letter-spacing: 0.3px; }
-        .profile-rank i { margin-right: 4px; }
         .logout-btn { background: rgba(255,59,92,0.1); border: 1px solid rgba(255,59,92,0.1); color: #ff3b5c; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .logout-btn:hover { background: rgba(255,59,92,0.2); }
 
-        /* ===== BALANCE ===== */
         .balance-panel { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.04); border-radius: 18px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; backdrop-filter: blur(2px); position: relative; z-index: 2; }
         .balance-label { color: #8a8a9a; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
         .balance-label i { color: #ffd700; }
         .balance-amount { font-size: 26px; font-weight: 700; color: #fff; }
         .balance-amount span { font-size: 14px; color: #6a6a7a; font-weight: 400; }
 
-        /* ===== MULTIPLIER ===== */
         .multiplier-box { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 22px 16px 18px; text-align: center; border: 1px solid rgba(255,215,0,0.04); margin-bottom: 16px; position: relative; z-index: 2; }
         .multiplier-label { color: #5a5a6a; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
         .multiplier-value { font-size: 64px; font-weight: 800; color: #ffd700; line-height: 1.1; transition: color 0.2s; font-variant-numeric: tabular-nums; text-shadow: 0 0 30px rgba(255,215,0,0.1); }
@@ -46,20 +40,17 @@
         .multiplier-sub { color: #5a5a6a; font-size: 13px; margin-top: 4px; }
         .multiplier-sub i { margin-right: 6px; color: #ffd700; }
 
-        /* ===== ROCKET ANIMATION ===== */
         .rocket-area { height: 60px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; position: relative; z-index: 2; }
         .rocket { font-size: 48px; transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .rocket.crash { transform: translateY(20px) rotate(180deg) scale(0.8); color: #ff3b5c; }
-        .rocket.fire { animation: rocketFire 0.3s infinite alternate; }
-        @keyframes rocketFire { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+        .rocket.fire { animation: rocketFire 0.15s infinite alternate; }
+        @keyframes rocketFire { 0% { transform: scale(1); } 100% { transform: scale(1.2) translateY(-4px); } }
 
-        /* ===== BET PRESETS ===== */
         .bet-presets { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; position: relative; z-index: 2; }
         .bet-preset { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); color: #8a8a9a; padding: 8px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .bet-preset:hover { background: rgba(255,215,0,0.04); color: #c0c0d0; }
         .bet-preset.active { background: rgba(255,215,0,0.08); color: #ffd700; border-color: rgba(255,215,0,0.12); }
 
-        /* ===== BUTTONS ===== */
         .action-row { display: flex; gap: 12px; margin-bottom: 14px; position: relative; z-index: 2; }
         .btn-primary { flex: 1; padding: 16px 0; border: none; border-radius: 60px; font-size: 17px; font-weight: 700; cursor: pointer; transition: 0.2s; background: linear-gradient(135deg, #ffd700, #b8860b); color: #0b0e17; box-shadow: 0 6px 24px rgba(255,215,0,0.12); display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(255,215,0,0.2); }
@@ -74,13 +65,12 @@
         .btn-withdraw { flex: 1; padding: 12px 0; border: none; border-radius: 40px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.02); color: #8a8a9a; border: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-withdraw:hover { background: rgba(255,255,255,0.04); color: #c0c0d0; }
 
-        /* ===== CRASH HISTORY ===== */
         .crash-history { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 6px; position: relative; z-index: 2; }
         .crash-dot { width: 34px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; background: rgba(255,255,255,0.02); color: #5a5a6a; border: 1px solid rgba(255,255,255,0.03); }
         .crash-dot.green { background: rgba(255,215,0,0.06); color: #ffd700; border-color: rgba(255,215,0,0.06); }
         .crash-dot.red { background: rgba(255,59,92,0.06); color: #ff3b5c; border-color: rgba(255,59,92,0.06); }
 
-        /* ===== MODAL ===== */
+        /* ===== MODALS ===== */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
         .modal-box { background: #12161f; border-radius: 32px; padding: 30px 24px; max-width: 400px; width: 100%; border: 1px solid rgba(255,215,0,0.04); box-shadow: 0 40px 80px rgba(0,0,0,0.9); max-height: 90vh; overflow-y: auto; }
@@ -105,6 +95,18 @@
         .toggle-link { color: #ffd700; cursor: pointer; text-decoration: underline; font-weight: 600; }
         .toggle-link:hover { color: #fff; }
 
+        .support-agent { display: flex; align-items: center; gap: 12px; background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.04); border-radius: 60px; padding: 8px 16px; margin-top: 8px; }
+        .support-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ff6b6b, #ee5a24); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; font-weight: 700; }
+        .support-info { flex: 1; }
+        .support-name { font-size: 14px; font-weight: 600; color: #fff; }
+        .support-name i { color: #ffd700; margin-left: 4px; }
+        .support-status { font-size: 11px; color: #4caf50; }
+        .support-status i { font-size: 8px; margin-right: 4px; }
+
+        .recharge-status-box { background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.04); border-radius: 16px; padding: 12px 16px; margin: 10px 0; }
+        .recharge-status-box .label { color: #8a8a9a; font-size: 12px; }
+        .recharge-status-box .value { color: #ffd700; font-size: 14px; font-weight: 600; }
+
         @media (max-width: 440px) {
             .app { padding: 18px 14px 24px; border-radius: 32px; }
             .logo-text { font-size: 18px; }
@@ -117,74 +119,38 @@
 </head>
 <body>
 
-    <!-- ===== LOGIN SCREEN (Hidden by default) ===== -->
+    <!-- ===== LOGIN SCREEN ===== -->
     <div class="app" id="loginScreen">
         <div class="header" style="justify-content:center;">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-crown"></i></div>
-                <div class="logo-text">Gold<span>Rush</span></div>
-            </div>
+            <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><div class="logo-text">Gold<span>Rush</span></div></div>
         </div>
         <div style="text-align:center; margin: 20px 0 10px; color:#ffd700; font-size:18px; font-weight:700;">LOGIN</div>
-
-        <div class="modal-input-group">
-            <label><i class="fas fa-user"></i> Username</label>
-            <input type="text" id="loginUsername" placeholder="Enter username" />
-        </div>
-        <div class="modal-input-group">
-            <label><i class="fas fa-lock"></i> Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter password" />
-        </div>
-
-        <div class="modal-actions" style="margin-top:10px;">
-            <button class="btn-primary" id="loginBtn" style="flex:1;"><i class="fas fa-sign-in-alt"></i> LOGIN</button>
-        </div>
-        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">
-            Don't have an account? <span class="toggle-link" id="showRegister">Register</span>
-        </div>
+        <div class="modal-input-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="loginUsername" placeholder="Enter username" /></div>
+        <div class="modal-input-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="loginPassword" placeholder="Enter password" /></div>
+        <div class="modal-actions" style="margin-top:10px;"><button class="btn-primary" id="loginBtn"><i class="fas fa-sign-in-alt"></i> LOGIN</button></div>
+        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">Don't have an account? <span class="toggle-link" id="showRegister">Register</span></div>
         <div id="loginMessage" style="text-align:center; margin-top:10px; font-size:14px; color:#ff3b5c;"></div>
     </div>
 
-    <!-- ===== REGISTER SCREEN (Hidden by default) ===== -->
+    <!-- ===== REGISTER SCREEN ===== -->
     <div class="app" id="registerScreen" style="display:none;">
         <div class="header" style="justify-content:center;">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-crown"></i></div>
-                <div class="logo-text">Gold<span>Rush</span></div>
-            </div>
+            <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><div class="logo-text">Gold<span>Rush</span></div></div>
         </div>
         <div style="text-align:center; margin: 20px 0 10px; color:#ffd700; font-size:18px; font-weight:700;">REGISTER</div>
-
-        <div class="modal-input-group">
-            <label><i class="fas fa-user"></i> Username</label>
-            <input type="text" id="registerUsername" placeholder="Choose username" />
-        </div>
-        <div class="modal-input-group">
-            <label><i class="fas fa-lock"></i> Password</label>
-            <input type="password" id="registerPassword" placeholder="Choose password" />
-        </div>
-        <div class="modal-input-group">
-            <label><i class="fas fa-lock"></i> Confirm Password</label>
-            <input type="password" id="registerConfirm" placeholder="Confirm password" />
-        </div>
-
-        <div class="modal-actions" style="margin-top:10px;">
-            <button class="btn-primary" id="registerBtn" style="flex:1;"><i class="fas fa-user-plus"></i> REGISTER</button>
-        </div>
-        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">
-            Already have an account? <span class="toggle-link" id="showLogin">Login</span>
-        </div>
+        <div class="modal-input-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="registerUsername" placeholder="Choose username" /></div>
+        <div class="modal-input-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="registerPassword" placeholder="Choose password" /></div>
+        <div class="modal-input-group"><label><i class="fas fa-lock"></i> Confirm Password</label><input type="password" id="registerConfirm" placeholder="Confirm password" /></div>
+        <div class="modal-actions" style="margin-top:10px;"><button class="btn-primary" id="registerBtn"><i class="fas fa-user-plus"></i> REGISTER</button></div>
+        <div style="text-align:center; margin-top:12px; color:#6a6a7a; font-size:14px;">Already have an account? <span class="toggle-link" id="showLogin">Login</span></div>
         <div id="registerMessage" style="text-align:center; margin-top:10px; font-size:14px; color:#ff3b5c;"></div>
     </div>
 
-    <!-- ===== MAIN GAME APP (Hidden by default) ===== -->
+    <!-- ===== MAIN GAME APP ===== -->
     <div class="app" id="gameApp" style="display:none;">
 
         <div class="header">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-crown"></i></div>
-                <div class="logo-text">Gold<span>Rush</span></div>
-            </div>
+            <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><div class="logo-text">Gold<span>Rush</span></div></div>
             <div class="level-badge"><i class="fas fa-star"></i> LVL <span id="userLevel">1</span></div>
         </div>
 
@@ -202,10 +168,7 @@
             <div class="balance-amount" id="balanceDisplay">100 <span>PKR</span></div>
         </div>
 
-        <!-- ROCKET ANIMATION -->
-        <div class="rocket-area">
-            <div class="rocket" id="rocketIcon">🚀</div>
-        </div>
+        <div class="rocket-area"><div class="rocket" id="rocketIcon">🚀</div></div>
 
         <div class="multiplier-box">
             <div class="multiplier-label">CURRENT MULTIPLIER</div>
@@ -233,9 +196,18 @@
             <button class="btn-withdraw" id="withdrawBtn"><i class="fas fa-arrow-right"></i> WITHDRAW</button>
         </div>
 
-        <!-- CHANGE PASSWORD -->
         <div style="text-align:center; margin-bottom:10px; z-index:2; position:relative;">
             <span class="toggle-link" id="showChangePassword" style="font-size:13px;"><i class="fas fa-key"></i> Change Password</span>
+        </div>
+
+        <!-- SUPPORT AGENT -->
+        <div class="support-agent">
+            <div class="support-avatar">A</div>
+            <div class="support-info">
+                <div class="support-name">Alisha Khan <i class="fas fa-check-circle"></i></div>
+                <div class="support-status"><i class="fas fa-circle"></i> Online · Support Agent</div>
+            </div>
+            <button id="supportBtn" style="background:rgba(255,215,0,0.06); border:1px solid rgba(255,215,0,0.06); border-radius:30px; padding:6px 14px; color:#ffd700; font-weight:600; cursor:pointer; font-size:12px;">CONTACT</button>
         </div>
 
         <div class="crash-history" id="crashHistory">
@@ -254,18 +226,9 @@
             <button class="modal-close" id="closeChangePasswordModal">✕</button>
             <div class="modal-title">Change <span>Password</span></div>
             <div class="modal-sub">Enter your current and new password</div>
-            <div class="modal-input-group">
-                <label><i class="fas fa-lock"></i> Current Password</label>
-                <input type="password" id="currentPassword" placeholder="Enter current password" />
-            </div>
-            <div class="modal-input-group">
-                <label><i class="fas fa-lock"></i> New Password</label>
-                <input type="password" id="newPassword" placeholder="Enter new password" />
-            </div>
-            <div class="modal-input-group">
-                <label><i class="fas fa-lock"></i> Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" placeholder="Confirm new password" />
-            </div>
+            <div class="modal-input-group"><label><i class="fas fa-lock"></i> Current Password</label><input type="password" id="currentPassword" placeholder="Enter current password" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-lock"></i> New Password</label><input type="password" id="newPassword" placeholder="Enter new password" /></div>
+            <div class="modal-input-group"><label><i class="fas fa-lock"></i> Confirm New Password</label><input type="password" id="confirmNewPassword" placeholder="Confirm new password" /></div>
             <div class="modal-actions">
                 <button class="btn-primary" id="confirmChangePassword"><i class="fas fa-check"></i> UPDATE PASSWORD</button>
                 <button class="btn-secondary" id="cancelChangePassword">CANCEL</button>
@@ -293,9 +256,10 @@
             <div class="modal-input-group"><label><i class="fas fa-hashtag"></i> JazzCash / EasyPaisa Number</label><input type="text" id="rechargeNumber" placeholder="e.g. 03XX-XXXXXXX" /></div>
             <div class="modal-input-group"><label><i class="fas fa-money-bill-wave"></i> Amount (PKR)</label><input type="text" id="rechargeAmountInput" placeholder="e.g. 500" /></div>
             <div class="modal-actions">
-                <button class="btn-primary" id="confirmRecharge"><i class="fas fa-check"></i> CONFIRM RECHARGE</button>
+                <button class="btn-primary" id="confirmRecharge"><i class="fas fa-check"></i> SUBMIT RECHARGE</button>
                 <button class="btn-secondary" id="cancelRecharge">CANCEL</button>
             </div>
+            <div id="rechargeStatus" style="margin-top:12px;"></div>
         </div>
     </div>
 
@@ -324,52 +288,51 @@
         </div>
     </div>
 
+    <!-- ===== SUPPORT MODAL ===== -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeSupportModal">✕</button>
+            <div class="modal-title">Support <span>Center</span></div>
+            <div class="modal-sub">Connect with our support agent</div>
+            <div style="display:flex; align-items:center; gap:14px; background:rgba(255,215,0,0.02); padding:12px; border-radius:16px; margin-bottom:16px;">
+                <div style="width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,#ff6b6b,#ee5a24); display:flex; align-items:center; justify-content:center; font-size:20px; color:#fff; font-weight:700;">A</div>
+                <div><div style="color:#fff; font-weight:600;">Alisha Khan</div><div style="color:#4caf50; font-size:13px;"><i class="fas fa-circle" style="font-size:8px;"></i> Online</div></div>
+            </div>
+            <div class="modal-input-group"><label><i class="fas fa-envelope"></i> Your Message</label><input type="text" id="supportMessage" placeholder="Describe your issue..." /></div>
+            <div class="modal-actions">
+                <button class="btn-primary" id="sendSupportMsg"><i class="fas fa-paper-plane"></i> SEND MESSAGE</button>
+                <button class="btn-secondary" id="closeSupportBtn">CLOSE</button>
+            </div>
+            <div id="supportResponse" style="margin-top:10px; font-size:14px; color:#4caf50;"></div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================ -->
     <script>
         (function() {
             'use strict';
 
             // ===== LOCAL STORAGE USER SYSTEM =====
-            function getUsers() {
-                return JSON.parse(localStorage.getItem('goldRushUsers')) || {};
-            }
+            function getUsers() { return JSON.parse(localStorage.getItem('goldRushUsers')) || {}; }
 
-            function saveUsers(users) {
-                localStorage.setItem('goldRushUsers', JSON.stringify(users));
-            }
+            function saveUsers(users) { localStorage.setItem('goldRushUsers', JSON.stringify(users)); }
 
-            function getCurrentUser() {
-                return localStorage.getItem('goldRushCurrentUser') || null;
-            }
+            function getCurrentUser() { return localStorage.getItem('goldRushCurrentUser') || null; }
 
-            function setCurrentUser(username) {
-                if (username) localStorage.setItem('goldRushCurrentUser', username);
-                else localStorage.removeItem('goldRushCurrentUser');
-            }
+            function setCurrentUser(username) { if (username) localStorage.setItem('goldRushCurrentUser', username);
+                else localStorage.removeItem('goldRushCurrentUser'); }
 
-            function getUserData(username) {
-                const users = getUsers();
-                return users[username] || null;
-            }
+            function getUserData(username) { const users = getUsers(); return users[username] || null; }
 
-            function saveUserData(username, data) {
-                const users = getUsers();
-                users[username] = data;
-                saveUsers(users);
-            }
+            function saveUserData(username, data) { const users = getUsers(); users[username] = data; saveUsers(users); }
 
-            // ===== INITIALIZE DEFAULT USERS =====
             function initDefaultUsers() {
                 const users = getUsers();
-                if (!users['admin']) {
-                    users['admin'] = {
-                        password: 'admin123',
-                        balance: 100,
-                        level: 1,
-                        wins: 0,
-                        rank: 'Level 1'
-                    };
-                    saveUsers(users);
-                }
+                if (!users['admin']) { users['admin'] = { password: 'admin123', balance: 100, level: 1, wins: 0,
+                        rank: 'Level 1' };
+                    saveUsers(users); }
             }
             initDefaultUsers();
 
@@ -390,7 +353,6 @@
             const registerMessage = document.getElementById('registerMessage');
             const logoutBtn = document.getElementById('logoutBtn');
 
-            // ===== SWITCH SCREENS =====
             function showLoginScreen() {
                 loginScreen.style.display = 'block';
                 registerScreen.style.display = 'none';
@@ -421,7 +383,6 @@
             showRegister.addEventListener('click', showRegisterScreen);
             showLogin.addEventListener('click', showLoginScreen);
 
-            // ===== LOGIN =====
             loginBtn.addEventListener('click', function() {
                 const username = loginUsername.value.trim();
                 const password = loginPassword.value.trim();
@@ -433,13 +394,14 @@
                 setTimeout(() => showGameApp(username), 300);
             });
 
-            // ===== REGISTER =====
             registerBtn.addEventListener('click', function() {
                 const username = registerUsername.value.trim();
                 const password = registerPassword.value.trim();
                 const confirm = registerConfirm.value.trim();
-                if (!username || !password || !confirm) { registerMessage.textContent = '⚠️ Please fill all fields.'; return; }
-                if (password.length < 4) { registerMessage.textContent = '❌ Password must be at least 4 characters.'; return; }
+                if (!username || !password || !confirm) { registerMessage.textContent = '⚠️ Please fill all fields.';
+                    return; }
+                if (password.length < 4) { registerMessage.textContent = '❌ Password must be at least 4 characters.';
+                    return; }
                 if (password !== confirm) { registerMessage.textContent = '❌ Passwords do not match.'; return; }
                 const users = getUsers();
                 if (users[username]) { registerMessage.textContent = '❌ Username already exists.'; return; }
@@ -449,15 +411,11 @@
                 setTimeout(() => showLoginScreen(), 500);
             });
 
-            // ===== LOGOUT =====
             logoutBtn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to logout?')) {
-                    setCurrentUser(null);
-                    showLoginScreen();
-                }
+                if (confirm('Are you sure you want to logout?')) { setCurrentUser(null);
+                    showLoginScreen(); }
             });
 
-            // ===== LOAD USER PROFILE =====
             function loadUserProfile(username) {
                 const data = getUserData(username);
                 if (!data) return;
@@ -471,7 +429,6 @@
                 window._balance = data.balance;
             }
 
-            // ===== SAVE USER DATA =====
             function saveCurrentUserData() {
                 if (!window._currentUser || !window._userData) return;
                 window._userData.balance = window._balance;
@@ -497,9 +454,7 @@
                 changePassMsg.textContent = '';
             });
 
-            function closeChangePassModal() {
-                changePassModal.classList.remove('active');
-            }
+            function closeChangePassModal() { changePassModal.classList.remove('active'); }
             closeChangePass.addEventListener('click', closeChangePassModal);
             cancelChangePass.addEventListener('click', closeChangePassModal);
 
@@ -507,16 +462,47 @@
                 const current = currentPassInput.value.trim();
                 const newPass = newPassInput.value.trim();
                 const confirm = confirmNewPassInput.value.trim();
-                if (!current || !newPass || !confirm) { changePassMsg.textContent = '⚠️ Please fill all fields.'; return; }
-                if (newPass.length < 4) { changePassMsg.textContent = '❌ Password must be at least 4 characters.'; return; }
+                if (!current || !newPass || !confirm) { changePassMsg.textContent = '⚠️ Please fill all fields.';
+                    return; }
+                if (newPass.length < 4) { changePassMsg.textContent = '❌ Password must be at least 4 characters.';
+                    return; }
                 if (newPass !== confirm) { changePassMsg.textContent = '❌ Passwords do not match.'; return; }
                 const user = getUserData(window._currentUser);
-                if (!user || user.password !== current) { changePassMsg.textContent = '❌ Current password is incorrect.'; return; }
+                if (!user || user.password !== current) { changePassMsg.textContent =
+                    '❌ Current password is incorrect.'; return; }
                 user.password = newPass;
                 saveUserData(window._currentUser, user);
                 changePassMsg.textContent = '✅ Password updated successfully!';
                 changePassMsg.style.color = '#4caf50';
-                setTimeout(() => { closeChangePassModal(); changePassMsg.textContent = ''; changePassMsg.style.color = '#ff3b5c'; }, 1000);
+                setTimeout(() => { closeChangePassModal();
+                    changePassMsg.textContent = '';
+                    changePassMsg.style.color = '#ff3b5c'; }, 1000);
+            });
+
+            // ===== SUPPORT =====
+            const supportModal = document.getElementById('supportModal');
+            const supportBtn = document.getElementById('supportBtn');
+            const closeSupportModal = document.getElementById('closeSupportModal');
+            const closeSupportBtn = document.getElementById('closeSupportBtn');
+            const sendSupportMsg = document.getElementById('sendSupportMsg');
+            const supportMessage = document.getElementById('supportMessage');
+            const supportResponse = document.getElementById('supportResponse');
+
+            supportBtn.addEventListener('click', function() {
+                supportModal.classList.add('active');
+                supportMessage.value = '';
+                supportResponse.textContent = '';
+            });
+
+            function closeSupport() { supportModal.classList.remove('active'); }
+            closeSupportModal.addEventListener('click', closeSupport);
+            closeSupportBtn.addEventListener('click', closeSupport);
+
+            sendSupportMsg.addEventListener('click', function() {
+                const msg = supportMessage.value.trim();
+                if (!msg) { supportResponse.textContent = '⚠️ Sir, please write your message.'; return; }
+                supportResponse.textContent = '✅ Sir, your message has been sent to Alisha. She will respond within 30 minutes. Thank you!';
+                supportMessage.value = '';
             });
 
             // ===== GAME ENGINE =====
@@ -534,23 +520,21 @@
 
             const rechargeModal = document.getElementById('rechargeModal');
             const withdrawModal = document.getElementById('withdrawModal');
-
             const rechargeAmounts = document.querySelectorAll('#rechargeGrid .modal-amount-btn');
             const withdrawAmounts = document.querySelectorAll('#withdrawGrid .modal-amount-btn');
-
             const rechargeName = document.getElementById('rechargeName');
             const rechargeNumber = document.getElementById('rechargeNumber');
             const rechargeAmountInput = document.getElementById('rechargeAmountInput');
             const withdrawName = document.getElementById('withdrawName');
             const withdrawNumber = document.getElementById('withdrawNumber');
             const withdrawAmountInput = document.getElementById('withdrawAmountInput');
-
             const confirmRecharge = document.getElementById('confirmRecharge');
             const confirmWithdraw = document.getElementById('confirmWithdraw');
             const cancelRecharge = document.getElementById('cancelRecharge');
             const cancelWithdraw = document.getElementById('cancelWithdraw');
             const closeRechargeModal = document.getElementById('closeRechargeModal');
             const closeWithdrawModal = document.getElementById('closeWithdrawModal');
+            const rechargeStatus = document.getElementById('rechargeStatus');
 
             let currentBet = 100;
             let isRoundActive = false;
@@ -569,15 +553,46 @@
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(200, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 1.2);
-                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+                    osc.frequency.setValueAtTime(300, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 1.5);
+                    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
                     osc.connect(gain);
                     gain.connect(ctx.destination);
                     osc.start();
-                    osc.stop(ctx.currentTime + 1.2);
-                } catch (e) { /* fallback silence */ }
+                    osc.stop(ctx.currentTime + 1.5);
+                    // Extra fire sound
+                    setTimeout(() => {
+                        const osc2 = ctx.createOscillator();
+                        const gain2 = ctx.createGain();
+                        osc2.type = 'square';
+                        osc2.frequency.setValueAtTime(150, ctx.currentTime);
+                        osc2.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.8);
+                        gain2.gain.setValueAtTime(0.15, ctx.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+                        osc2.connect(gain2);
+                        gain2.connect(ctx.destination);
+                        osc2.start();
+                        osc2.stop(ctx.currentTime + 0.8);
+                    }, 100);
+                } catch (e) {}
+            }
+
+            function playRocketFlySound() {
+                try {
+                    const ctx = new(window.AudioContext || window.webkitAudioContext)();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.6);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.6);
+                } catch (e) {}
             }
 
             function playCashOutSound() {
@@ -587,14 +602,14 @@
                     const gain = ctx.createGain();
                     osc.type = 'sine';
                     osc.frequency.setValueAtTime(800, ctx.currentTime);
-                    osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
+                    osc.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.3);
                     gain.gain.setValueAtTime(0.2, ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
                     osc.connect(gain);
                     gain.connect(ctx.destination);
                     osc.start();
                     osc.stop(ctx.currentTime + 0.4);
-                } catch (e) { /* fallback */ }
+                } catch (e) {}
             }
 
             // ===== UI UPDATE =====
@@ -605,7 +620,7 @@
 
             function addCrashToHistory(val) {
                 const el = document.createElement('div');
-                el.className = 'crash-dot ' + (val >= 1.1 && val < 2.0 ? 'green' : 'red');
+                el.className = 'crash-dot ' + (val >= 1.1 && val < 15.0 ? 'green' : 'red');
                 el.textContent = val.toFixed(1) + 'x';
                 crashHistoryContainer.appendChild(el);
                 if (crashHistoryContainer.children.length > 12) {
@@ -613,11 +628,11 @@
                 }
             }
 
-            // ===== GAME ENGINE =====
+            // ===== GAME ENGINE - AUTO 1X TO 15X =====
             function startRound() {
                 if (isRoundActive) return;
                 if (window._balance < currentBet) {
-                    alert('Insufficient balance! Please recharge.');
+                    alert('Sir, insufficient balance! Please recharge.');
                     return;
                 }
                 window._balance -= currentBet;
@@ -639,27 +654,40 @@
                     if (countdown <= 0) {
                         clearInterval(countdownInterval);
                         countdownDisplay.textContent = 'GO!';
+                        playRocketFlySound();
                         startMultiplier();
                     }
                 }, 1000);
             }
 
             function startMultiplier() {
-                const crashPoint = 1.00 + (Math.random() * 0.90) + 0.10;
+                // Auto random crash point between 1.0x and 15.0x
+                const crashPoint = 1.00 + (Math.random() * 14.00);
                 let target = 1.00;
-                let step = 0.012 + (Math.random() * 0.008);
+                let step = 0.015 + (Math.random() * 0.02);
+                let isCrashedFlag = false;
                 clearInterval(roundInterval);
                 roundInterval = setInterval(() => {
+                    if (isCrashedFlag) return;
                     target += step;
                     currentMultiplier = Math.min(target, crashPoint);
                     multiplierDisplay.textContent = currentMultiplier.toFixed(2) + 'x';
-                    // Rocket fire animation
+                    // Rocket fire effect
                     if (currentMultiplier > 1.05) {
                         rocketIcon.classList.add('fire');
                     } else {
                         rocketIcon.classList.remove('fire');
                     }
-                    if (currentMultiplier >= crashPoint || currentMultiplier >= 2.00) {
+                    // Random color change on multiplier
+                    if (currentMultiplier > 5) {
+                        multiplierDisplay.style.color = '#ff6b6b';
+                    } else if (currentMultiplier > 3) {
+                        multiplierDisplay.style.color = '#ffd700';
+                    } else {
+                        multiplierDisplay.style.color = '#ffd700';
+                    }
+                    if (currentMultiplier >= crashPoint || currentMultiplier >= 15.0) {
+                        isCrashedFlag = true;
                         crashRound();
                     }
                 }, 60);
@@ -678,11 +706,10 @@
                 addCrashToHistory(crashVal);
                 placeBetBtn.disabled = false;
                 cashOutBtn.disabled = true;
-                // Increase wins count
+                // Wins increase
                 if (window._userData) {
                     window._userData.wins = (window._userData.wins || 0) + 1;
                     document.getElementById('userWins').textContent = window._userData.wins;
-                    // Level up: every 5 wins = +1 level
                     const newLevel = Math.floor(window._userData.wins / 5) + 1;
                     window._userData.level = newLevel;
                     window._userData.rank = 'Level ' + newLevel;
@@ -690,15 +717,17 @@
                     document.getElementById('userRank').textContent = 'Level ' + newLevel;
                     saveCurrentUserData();
                 }
+                multiplierDisplay.style.color = '#ffd700';
                 setTimeout(() => {
                     multiplierDisplay.classList.remove('crashed');
                     rocketIcon.className = 'rocket';
                     rocketIcon.textContent = '🚀';
                     currentMultiplier = 1.00;
                     multiplierDisplay.textContent = '1.00x';
+                    multiplierDisplay.style.color = '#ffd700';
                     countdownDisplay.textContent = '5';
                     updateUI();
-                }, 800);
+                }, 1000);
             }
 
             function cashOut() {
@@ -716,6 +745,7 @@
                 countdownDisplay.textContent = 'Cashed!';
                 rocketIcon.className = 'rocket';
                 rocketIcon.textContent = '🤑';
+                multiplierDisplay.style.color = '#ffd700';
                 setTimeout(() => {
                     countdownDisplay.textContent = '5';
                     rocketIcon.textContent = '🚀';
@@ -733,7 +763,7 @@
                 });
             });
 
-            // ===== MODALS =====
+            // ===== RECHARGE - FAKE PENDING SYSTEM =====
             function openRecharge() {
                 rechargeModal.classList.add('active');
                 selectedRecharge = 0;
@@ -741,11 +771,12 @@
                 rechargeName.value = '';
                 rechargeNumber.value = '';
                 rechargeAmountInput.value = '';
+                rechargeStatus.innerHTML = '';
             }
 
             function openWithdraw() {
                 if (window._balance < 100) {
-                    alert('Minimum withdrawal is 100 PKR.');
+                    alert('Sir, minimum withdrawal is 100 PKR.');
                     return;
                 }
                 withdrawModal.classList.add('active');
@@ -783,25 +814,72 @@
                 const name = rechargeName.value.trim();
                 const number = rechargeNumber.value.trim();
                 const amount = parseInt(rechargeAmountInput.value.trim()) || selectedRecharge;
-                if (!name || !number || !amount) { alert('Please fill all fields.'); return; }
-                window._balance += amount;
-                updateUI();
-                saveCurrentUserData();
-                alert('✅ Recharge Successful! Amount: ' + amount + ' PKR\nAccount: ' + name + '\nNumber: ' + number);
-                closeModals();
+                if (!name || !number || !amount) {
+                    rechargeStatus.innerHTML = '⚠️ Sir, please fill all fields.';
+                    return;
+                }
+                // FAKE PENDING SYSTEM - NO AUTO ADD
+                const hours = Math.floor(Math.random() * 11) + 1;
+                const minutes = Math.floor(Math.random() * 60);
+                rechargeStatus.innerHTML = `
+                    <div class="recharge-status-box">
+                        <div class="label">Recharge Status</div>
+                        <div class="value">⏳ PENDING</div>
+                        <div style="color:#6a6a7a; font-size:13px; margin-top:4px;">
+                            Sir, your recharge request of <strong style="color:#ffd700;">${amount} PKR</strong> has been submitted.
+                        </div>
+                        <div style="color:#6a6a7a; font-size:13px; margin-top:4px;">
+                            <i class="fas fa-clock"></i> Estimated time: <strong style="color:#ffd700;">${hours}h ${minutes}m</strong>
+                        </div>
+                        <div style="color:#8a8a9a; font-size:12px; margin-top:8px; border-top:1px solid rgba(255,215,0,0.04); padding-top:8px;">
+                            🔄 If payment not received, contact Alisha (Support Agent) immediately.
+                        </div>
+                        <div style="color:#ff3b5c; font-size:12px; margin-top:4px;">
+                            <i class="fas fa-robot"></i> Automated bot service is processing your request.
+                        </div>
+                    </div>
+                `;
+                // Fake bot response after random time
+                setTimeout(() => {
+                    if (Math.random() > 0.3) {
+                        rechargeStatus.innerHTML += `
+                            <div class="recharge-status-box" style="border-color:rgba(255,215,0,0.08); margin-top:8px;">
+                                <div style="color:#6a6a7a; font-size:12px;">🤖 Bot Service</div>
+                                <div style="color:#ffd700; font-size:13px;">
+                                    Sir, your transaction is still processing. Estimated wait time: ${Math.floor(Math.random() * 8) + 1}h
+                                </div>
+                            </div>
+                        `;
+                    }
+                }, 3000);
+                // Close button option
+                setTimeout(() => {
+                    rechargeStatus.innerHTML += `
+                        <div style="margin-top:10px;">
+                            <button class="btn-primary" style="padding:10px 20px; font-size:14px; width:100%;" id="closeRechargeStatusBtn">
+                                <i class="fas fa-check"></i> UNDERSTAND, SIR
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('closeRechargeStatusBtn').addEventListener('click', function() {
+                        closeModals();
+                    });
+                }, 500);
+                // No auto add to balance - user must wait or contact support
             });
 
             confirmWithdraw.addEventListener('click', function() {
                 const name = withdrawName.value.trim();
                 const number = withdrawNumber.value.trim();
                 const amount = parseInt(withdrawAmountInput.value.trim()) || selectedWithdraw;
-                if (!name || !number || !amount) { alert('Please fill all fields.'); return; }
-                if (amount > window._balance) { alert('Insufficient balance!'); return; }
+                if (!name || !number || !amount) { alert('Sir, please fill all fields.'); return; }
+                if (amount > window._balance) { alert('Sir, insufficient balance!'); return; }
                 window._balance -= amount;
                 updateUI();
                 saveCurrentUserData();
-                alert('✅ Withdrawal Request Submitted! Amount: ' + amount + ' PKR\nAccount: ' + name + '\nNumber: ' +
-                    number);
+                alert('✅ Sir, withdrawal request submitted! Amount: ' + amount +
+                    ' PKR\nAccount: ' + name + '\nNumber: ' + number +
+                    '\n\nFunds will be sent within 24-48 hours.');
                 closeModals();
             });
 
@@ -816,20 +894,16 @@
             placeBetBtn.addEventListener('click', startRound);
             cashOutBtn.addEventListener('click', cashOut);
 
-            // ===== AUTO-LOGIN CHECK =====
+            // ===== AUTO-LOGIN =====
             const savedUser = getCurrentUser();
-            if (savedUser && getUserData(savedUser)) {
-                showGameApp(savedUser);
-            } else {
-                showLoginScreen();
-            }
+            if (savedUser && getUserData(savedUser)) { showGameApp(savedUser); } else { showLoginScreen(); }
 
             // ===== INIT HISTORY =====
             function initHistory() {
-                const hist = [1.2, 1.8, 1.0, 1.5, 1.3, 2.0];
+                const hist = [1.2, 3.8, 1.0, 5.5, 2.3, 8.1, 1.5, 12.4, 1.8, 6.7];
                 hist.forEach(v => {
                     const el = document.createElement('div');
-                    el.className = 'crash-dot ' + (v >= 1.1 && v < 2.0 ? 'green' : 'red');
+                    el.className = 'crash-dot ' + (v >= 1.1 && v < 15.0 ? 'green' : 'red');
                     el.textContent = v.toFixed(1) + 'x';
                     crashHistoryContainer.appendChild(el);
                 });
@@ -838,5 +912,6 @@
 
         })();
     </script>
+
 </body>
 </html>
